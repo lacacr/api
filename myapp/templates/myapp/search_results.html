@@ -1,0 +1,28 @@
+<!-- myapp/templates/myapp/search_results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for "{{ form.cleaned_data.query }}"</h1>
+
+    {# Display the search form #}
+    {% include 'myapp/search_form.html' %}
+
+    <ul>
+        {% for place in places %}
+            <li>{{ place.name }} - {{ place.formatted_address }} - {{ place.place_id }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Search History</h2>
+    <ul>
+        {% for history in search_history %}
+            <li>{{ history.query }} - {{ history.place_name }} - {{ history.formatted_address }} - {{ history.place_id }} - Distance: {{ history.distance|floatformat:2 }} kilometers</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
